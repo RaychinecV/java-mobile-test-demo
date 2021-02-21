@@ -11,8 +11,8 @@
     <properties>
         <!--Application properties-->
         <platform>Android</platform>
-        <user.login>SlaveTester123@gmail.com</user.login>
-        <user.password>Helloworld123!</user.password>
+        <user.login>antonlasko123@gmail.com</user.login>
+        <user.password>Helloanton123!</user.password>
 
         <!--System properties-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
