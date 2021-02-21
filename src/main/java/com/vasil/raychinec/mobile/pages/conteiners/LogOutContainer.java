@@ -5,6 +5,7 @@ import com.vasil.raychinec.mobile.pages.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 
 import static com.vasil.raychinec.mobile.constants.LocatorConstants.ANDROID_BASE_ID;
@@ -36,10 +37,12 @@ public class LogOutContainer extends BasePage {
     }
 
     @Override
+    @Step
     public boolean isPageDisplayed() {
         return isAllElementsDisplayed();
     }
 
+    @Step
     public void clickBtnConfirmLogOut() {
         log.info("Clicking on the confirm Log Out button.");
         waitToBeClickable(btnConfirmLogOut).click();

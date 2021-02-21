@@ -5,6 +5,7 @@ import com.vasil.raychinec.mobile.pages.conteiners.FootContainer;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.qameta.allure.Step;
 
 import static com.vasil.raychinec.mobile.constants.LocatorConstants.ANDROID_BASE_ID;
 
@@ -45,7 +46,7 @@ public class EmptyFriendsPage extends BasePage {
         footContainer = new FootContainer(driver);
         this.driver = driver;
     }
-
+    @Step
     public boolean isTitlesAreSame() {
         softAssert.assertEquals(actualTitleLabel.getText(), expectedTitleLabel);
         softAssert.assertEquals(actualSubTitleLabel.getText(), expectedSubTitleLabel);
@@ -54,6 +55,7 @@ public class EmptyFriendsPage extends BasePage {
     }
 
     @Override
+    @Step
     public boolean isPageDisplayed() {
         waitToBeVisible(actualTitleLabel);
         return isAllElementsDisplayed();

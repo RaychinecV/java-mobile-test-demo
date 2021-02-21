@@ -37,6 +37,7 @@ public class FootContainer extends BasePage {
     }
 
     @Override
+    @Step
     public boolean isPageDisplayed() {
         isAllElementsDisplayed();
         return false;

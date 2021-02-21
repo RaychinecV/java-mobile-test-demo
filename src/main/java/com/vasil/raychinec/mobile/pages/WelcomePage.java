@@ -7,7 +7,6 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 
-
 import static com.vasil.raychinec.mobile.constants.LocatorConstants.ANDROID_BASE_ID;
 
 @Log4j2
@@ -61,6 +60,7 @@ public class WelcomePage extends BasePage {
     }
 
     @Override
+    @Step
     public boolean isPageDisplayed() {
         waitToBeVisible(actualTitleLabel);
         return isAllElementsDisplayed();

@@ -12,22 +12,16 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
-import sun.rmi.runtime.Log;
 
 import java.lang.reflect.Field;
-import java.sql.Time;
 import java.time.Duration;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 import static com.vasil.raychinec.mobile.utils.ApplicationProperties.PLATFORM;
 
@@ -43,17 +37,14 @@ public abstract class BasePage implements Displayable {
         softAssert = new SoftAssert();
     }
 
-    @Step
     public MobileElement find(final By element) {
         return this.driver.findElement(element);
     }
 
-    @Step
     public List<MobileElement> findAll(final By element) {
         return this.driver.findElements(element);
     }
 
-    @Step
     public MobileElement waitToBeVisible(final MobileElement element) {
         new WebDriverWait(driver, WAIT_TIMEOUT)
                 .ignoring(StaleElementReferenceException.class)
@@ -61,7 +52,6 @@ public abstract class BasePage implements Displayable {
         return element;
     }
 
-    @Step
     public MobileElement waitToBeVisible(final MobileElement element, final int timeOut) {
         new WebDriverWait(driver, timeOut)
                 .ignoring(StaleElementReferenceException.class)
@@ -69,7 +59,6 @@ public abstract class BasePage implements Displayable {
         return element;
     }
 
-    @Step
     public MobileElement waitToBePresent(final MobileElement element) {
         new WebDriverWait(driver, WAIT_TIMEOUT)
                 .ignoring(StaleElementReferenceException.class)
@@ -77,7 +66,6 @@ public abstract class BasePage implements Displayable {
         return element;
     }
 
-    @Step
     public MobileElement waitToBePresent(final MobileElement element, final int timeOut) {
         new WebDriverWait(driver, timeOut)
                 .ignoring(StaleElementReferenceException.class)
@@ -85,12 +73,10 @@ public abstract class BasePage implements Displayable {
         return element;
     }
 
-    @Step
     public boolean isElementPresent(MobileElement element) {
         return isElementPresent(element, WAIT_TIMEOUT);
     }
 
-    @Step
     public boolean isElementPresent(MobileElement element, int timeout) {
         try {
             waitToBePresent(element, timeout);
@@ -100,7 +86,6 @@ public abstract class BasePage implements Displayable {
         }
     }
 
-    @Step
     public MobileElement waitToBeClickable(final MobileElement element) {
         new WebDriverWait(driver, WAIT_TIMEOUT)
                 .ignoring(StaleElementReferenceException.class)
@@ -108,7 +93,6 @@ public abstract class BasePage implements Displayable {
         return element;
     }
 
-    @Step
     public MobileElement waitToBeClickable(final MobileElement element, final int timeOut) {
         new WebDriverWait(driver, timeOut)
                 .ignoring(StaleElementReferenceException.class)
@@ -116,12 +100,10 @@ public abstract class BasePage implements Displayable {
         return element;
     }
 
-    @Step
     public void clickOnElement(MobileElement element) {
         element.click();
     }
 
-    @Step
     public void enterText(final MobileElement element, final String text, final boolean isClear) {
         this.waitToBeVisible(element);
         if (isClear) {
@@ -131,7 +113,6 @@ public abstract class BasePage implements Displayable {
         this.hideKeyboard();
     }
 
-    @Step
     public void enterText(final MobileElement element, final String text) {
         this.enterText(element, text, true);
     }

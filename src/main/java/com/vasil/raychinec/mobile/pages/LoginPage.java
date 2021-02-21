@@ -98,6 +98,7 @@ public class LoginPage extends BasePage {
     }
 
     @Override
+    @Step
     public boolean isPageDisplayed() {
         waitToBeVisible(actualTitleLabel);
         return isAllElementsDisplayed();
