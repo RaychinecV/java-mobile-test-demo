@@ -1,6 +1,7 @@
 package com.vasil.raychinec.mobile.config.driver;
 
 import com.vasil.raychinec.mobile.exeption.UnsupportedPlatformException;
+
 import com.vasil.raychinec.mobile.services.Factory;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -19,19 +20,19 @@ import java.net.URL;
 @Accessors(chain = true)
 public class DriverFactory implements Factory<AppiumDriver<MobileElement>, DriverFactory> {
 
-    private Platform platform = Platform.ANDROID;
+    private Platforms platforms = Platforms.ANDROID;
     private URL url;
 
     @Override
     public AppiumDriver<MobileElement> create() {
-        final DesiredCapabilities capabilities = new CapabilityFactory().setPlatform(platform).create();
-        switch (platform) {
+        final DesiredCapabilities capabilities = new CapabilityFactory().setPlatforms(platforms).create();
+        switch (platforms) {
             case ANDROID:
                 return new AndroidDriver<MobileElement>(getAppiumURL(), capabilities);
             case IOS:
                 return new IOSDriver<MobileElement>(getAppiumURL(), capabilities);
             default:
-                throw new UnsupportedPlatformException("Sorry, but that framework do not support platform", platform.name());
+                throw new UnsupportedPlatformException("Sorry, but that framework do not support platform", platforms.name());
         }
     }
 

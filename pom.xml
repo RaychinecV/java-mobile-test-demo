@@ -11,6 +11,8 @@
     <properties>
         <!--Application properties-->
         <platform>Android</platform>
+        <user.login>SlaveTester123@gmail.com</user.login>
+        <user.password>Helloworld123!</user.password>
 
         <!--System properties-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,6 +28,7 @@
         <log4j.version>2.14.0</log4j.version>
         <lombok.version>1.18.16</lombok.version>
         <allure_testng.version>2.13.8</allure_testng.version>
+        <assertj.version>3.19.0</assertj.version>
 
         <!--Build plugins versions-->
         <maven.compiler.version>3.8.1</maven.compiler.version>
@@ -81,6 +84,12 @@
             <artifactId>allure-testng</artifactId>
             <version>${allure_testng.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -101,6 +110,8 @@
                 <configuration>
                     <systemPropertyVariables>
                         <platform>${platform}</platform>
+                        <user.login>${user.login}</user.login>
+                        <user.password>${user.password}</user.password>
                     </systemPropertyVariables>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testSuite.xml</suiteXmlFile>

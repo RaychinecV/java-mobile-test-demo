@@ -21,23 +21,23 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        log.info("Starting test {}", result.getTestName());
+        log.info("Starting test {}", result.getName());
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        log.info("Test {} is passed.", result.getTestName());
+        log.info("Test {} is passed.", result.getName());
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        log.info("Test {} is failed!!!", result.getTestName());
+        log.info("Test {} is failed!!!", result.getName());
         this.takeScreenshot();
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        log.info("Test {} is skipped!!!", result.getTestName());
+        log.info("Test {} is skipped!!!", result.getName());
         this.takeScreenshot();
     }
 
