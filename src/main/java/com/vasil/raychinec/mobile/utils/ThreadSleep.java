@@ -3,14 +3,10 @@ package com.vasil.raychinec.mobile.utils;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-public final class Utils {
+public final class ThreadSleep {
 
-    private Utils() {
+    private ThreadSleep() {
         throw new AssertionError("Suppress default constructor for noninstantiability");
-    }
-
-    public static String getSystemName() {
-        return System.getProperty("os.name");
     }
 
     public static void sleepSec(long seconds) {

@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Expedite Suite" preserve-order="true">
     <listeners>
-        <listener class-name="com.vasil.raychinec.mobile.listeners.TestListener"/>
+        <listener class-name="com.vasil.raychinec.mobile.listener.TestListener"/>
     </listeners>
 
     <test name="Regression">

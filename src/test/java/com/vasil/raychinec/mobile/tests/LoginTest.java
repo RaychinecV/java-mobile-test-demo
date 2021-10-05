@@ -6,27 +6,21 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void logInTest() {
-        assertThat(welcomePage.isPageDisplayed())
+
+        assertThat(welcomePage.isRequiredPageElementsAreDisplayed())
                 .as("Welcome page should be displayed.")
                 .isEqualTo(true);
-        assertThat(welcomePage.isTitlesAreSame())
-                .as("Actual and expected titles should be same.")
-                .isEqualTo(true);
         welcomePage.clickLoginBtn();
-        assertThat(loginPage.isPageDisplayed())
+
+        assertThat(loginPage.isRequiredPageElementsAreDisplayed())
                 .as("Login page should be displayed after login clicking.")
-                .isEqualTo(true);
-        assertThat(loginPage.isTitlesAreSame())
-                .as("Actual and expected titles should be same.")
                 .isEqualTo(true);
         loginPage
                 .fillLogin()
                 .clickLoginBtn();
-        assertThat(emptyFriendsPage.isPageDisplayed())
+
+        assertThat(emptyFriendsPage.isRequiredPageElementsAreDisplayed())
                 .as("Empty friends page should be displayed after first login.")
-                .isEqualTo(true);
-        assertThat(emptyFriendsPage.isTitlesAreSame())
-                .as("Actual and expected titles should be same.")
                 .isEqualTo(true);
     }
 }

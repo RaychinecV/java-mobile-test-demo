@@ -7,19 +7,10 @@ public class LogOutTest extends BaseTest {
 
     @BeforeMethod
     public void logInByEmail() {
-        assertThat(welcomePage.isPageDisplayed())
-                .as("Welcome page should be displayed.")
-                .isEqualTo(true);
         welcomePage.clickLoginBtn();
-        assertThat(loginPage.isPageDisplayed())
-                .as("Login page should be displayed after login clicking.")
-                .isEqualTo(true);
         loginPage
                 .fillLogin()
                 .clickLoginBtn();
-        assertThat(emptyFriendsPage.isPageDisplayed())
-                .as("Empty friends page should be displayed after first login.")
-                .isEqualTo(true);
     }
 
     @Test
@@ -27,17 +18,21 @@ public class LogOutTest extends BaseTest {
         emptyFriendsPage
                 .footContainer
                 .clickOnBtnSettings();
-        assertThat(userSettingsPage.isPageDisplayed())
+
+        assertThat(userSettingsPage.isRequiredPageElementsAreDisplayed())
                 .as("User settings page should be displayed.")
                 .isEqualTo(true);
         userSettingsPage.clickOnBtnLogOut();
         assertThat(userSettingsPage
                 .logOutContainer
-                .isPageDisplayed())
+                .isRequiredPageElementsAreDisplayed())
                 .as("Log out container should displayed")
                 .isEqualTo(true);
-        userSettingsPage.logOutContainer.clickBtnConfirmLogOut();
-        assertThat(welcomePage.isPageDisplayed())
+        userSettingsPage
+                .logOutContainer
+                .clickBtnConfirmLogOut();
+
+        assertThat(welcomePage.isRequiredPageElementsAreDisplayed())
                 .as("Welcome page should displayed after log out.")
                 .isEqualTo(true);
     }

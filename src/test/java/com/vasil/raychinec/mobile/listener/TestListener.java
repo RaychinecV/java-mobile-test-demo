@@ -1,6 +1,7 @@
-package com.vasil.raychinec.mobile.listeners;
+package com.vasil.raychinec.mobile.listener;
 
 
+import com.vasil.raychinec.mobile.driver.Driver;
 import io.qameta.allure.Attachment;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.OutputType;
@@ -12,9 +13,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
-
-import static com.vasil.raychinec.mobile.tests.BaseTest.driver;
 
 @Log4j2
 public class TestListener implements ITestListener {
@@ -45,7 +43,7 @@ public class TestListener implements ITestListener {
     public byte[] takeScreenshot() {
         byte[] imageInByte = null;
         try {
-            final BufferedImage image = ImageIO.read(((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE));
+            final BufferedImage image = ImageIO.read(((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.FILE));
             final ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(image, "png", baos);
             baos.flush();

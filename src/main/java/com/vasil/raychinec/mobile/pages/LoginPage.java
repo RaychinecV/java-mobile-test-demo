@@ -6,42 +6,40 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.WebDriver;
 
 import static com.vasil.raychinec.mobile.constants.LocatorConstants.ANDROID_BASE_ID;
-import static com.vasil.raychinec.mobile.utils.ApplicationProperties.BASE_PASSWORD;
-import static com.vasil.raychinec.mobile.utils.ApplicationProperties.BASE_USER;
+import static com.vasil.raychinec.mobile.constants.ApplicationProperties.BASE_PASSWORD;
+import static com.vasil.raychinec.mobile.constants.ApplicationProperties.BASE_USER;
 
 @Log4j2
 public class LoginPage extends BasePage {
 
-    @Display(getName = "Field login")
+    @Display(name = "Field login")
     @AndroidFindBy(id = ANDROID_BASE_ID + "phone_or_email_main_input")
     private MobileElement fldLogin;
 
-    @Display(getName = "Button login")
+    @Display(name = "Button login")
     @AndroidFindBy(id = ANDROID_BASE_ID + "auth_login")
     private MobileElement btnLogin;
 
-    @Display(getName = "Main title")
+    @Display(name = "Main title")
     @AndroidFindBy(id = ANDROID_BASE_ID + "screen_title_title")
     private MobileElement actualTitleLabel;
 
-    @Display(getName = "Sub title")
+    @Display(name = "Sub title")
     @AndroidFindBy(id = ANDROID_BASE_ID + "screen_title_subtitle")
     private MobileElement actualSubTitleLabel;
 
-    @Display(getName = "Field password")
+    @Display(name = "Field password")
     @AndroidFindBy(xpath = "(//*[@class='android.widget.EditText'])[2]")
     private MobileElement fldPassword;
 
     private final String expectedTitleLabel = "Welcome back!";
     private final String expectedSubTitleLabel = "We're so excited to see you again!";
 
-    protected final AppiumDriver<MobileElement> driver;
-
-    public LoginPage(AppiumDriver<MobileElement> driver) {
+    public LoginPage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
     }
 
     @Step
@@ -88,19 +86,13 @@ public class LoginPage extends BasePage {
         waitToBeClickable(btnLogin).click();
     }
 
+    @Override
     @Step
-    public boolean isTitlesAreSame() {
+    public boolean isRequiredPageElementsAreDisplayed() {
         waitToBeVisible(actualTitleLabel);
         softAssert.assertEquals(actualTitleLabel.getText(), expectedTitleLabel);
         softAssert.assertEquals(actualSubTitleLabel.getText(), expectedSubTitleLabel);
         softAssert.assertAll();
-        return true;
-    }
-
-    @Override
-    @Step
-    public boolean isPageDisplayed() {
-        waitToBeVisible(actualTitleLabel);
         return isAllElementsDisplayed();
     }
 }

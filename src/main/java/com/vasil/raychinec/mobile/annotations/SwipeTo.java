@@ -1,7 +1,6 @@
 package com.vasil.raychinec.mobile.annotations;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import com.vasil.raychinec.mobile.constants.SwipeDirection;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,6 +9,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Display {
-    String name();
+public @interface SwipeTo {
+    SwipeDirection swipeTo();
 }

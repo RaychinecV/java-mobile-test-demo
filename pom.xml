@@ -9,21 +9,22 @@
     <version>1.0</version>
 
     <properties>
-        <!--Application properties-->
-        <platform>Android</platform>
-        <user.login>antonlasko123@gmail.com</user.login>
-        <user.password>Helloanton123!</user.password>
-
         <!--System properties-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <platform>Android</platform>
+        <user.login>antonlasko123@gmail.com</user.login>
+        <user.password>Helloanton123!</user.password>
         <report.dir>${project.basedir}${file.separator}allure-results</report.dir>
+        <apk.name>discord_v93.9.apk</apk.name>
+        <apk.path>${project.basedir}${file.separator}src${file.separator}main${file.separator}resources${file.separator}${apk.name}</apk.path>
+        <is.browserstack>false</is.browserstack>
 
         <!--Library versions-->
         <appium.version>7.4.1</appium.version>
         <selenium.version>3.141.59</selenium.version>
-        <testng.version>7.3.0</testng.version>
+        <testng.version>7.4.0</testng.version>
         <ashot.version>1.5.4</ashot.version>
         <log4j.version>2.14.0</log4j.version>
         <lombok.version>1.18.16</lombok.version>
@@ -93,6 +94,20 @@
     </dependencies>
 
     <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>
+                    src/test/resources
+                </directory>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -108,13 +123,21 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.version}</version>
                 <configuration>
+                    <systemProperties>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>target/allure-results</value>
+                        </property>
+                    </systemProperties>
                     <systemPropertyVariables>
+                        <apk.path>${apk.path}</apk.path>
                         <platform>${platform}</platform>
                         <user.login>${user.login}</user.login>
                         <user.password>${user.password}</user.password>
+                        <is.browserstack>${is.browserstack}</is.browserstack>
                     </systemPropertyVariables>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testSuite.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/regressionSuite.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
@@ -129,21 +152,11 @@
                     </dependency>
                 </dependencies>
             </plugin>
-        </plugins>
-    </build>
-
-    <reporting>
-        <excludeDefaults>true</excludeDefaults>
-        <plugins>
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <reportDirectory>${report.dir}</reportDirectory>
-                </configuration>
+                <version>2.10.0</version>
             </plugin>
         </plugins>
-    </reporting>
-
+    </build>
 </project>

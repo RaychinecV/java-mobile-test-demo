@@ -1,8 +1,9 @@
-package com.vasil.raychinec.mobile.config.driver;
+package com.vasil.raychinec.mobile.driver;
 
-import com.vasil.raychinec.mobile.exeption.UnsupportedPlatformException;
+import com.vasil.raychinec.mobile.exeption.UnsupportedMobilePlatformException;
 import com.vasil.raychinec.mobile.services.Factory;
 import com.vasil.raychinec.mobile.constants.ApplicationConstants;
+import com.vasil.raychinec.mobile.constants.ApplicationProperties;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import lombok.Setter;
@@ -11,33 +12,49 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import static com.vasil.raychinec.mobile.constants.ApplicationProperties.IS_BROWSERSTACK;
+
 
 @Log4j2
 @Setter
 @Accessors(chain = true)
 public class CapabilityFactory implements Factory<DesiredCapabilities, CapabilityFactory> {
-    private Platforms platforms = Platforms.ANDROID;
+    private Platforms platform = ApplicationProperties.PLATFORM;
 
     @Override
     public DesiredCapabilities create() {
-        switch (platforms) {
+        switch (platform) {
             case ANDROID:
-                return getAndroidCapability();
+                return IS_BROWSERSTACK ? getAndroidBrowserstackCapability() : getAndroidCapability();
             case IOS:
                 return getIOSCapability();
             default:
-                throw new UnsupportedPlatformException("Sorry, but that framework do not support platform", platforms.name());
+                throw new UnsupportedMobilePlatformException("Sorry, but that framework do not support platform", platform.name());
         }
     }
 
     private DesiredCapabilities getAndroidCapability() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(AndroidMobileCapabilityType.PLATFORM_NAME, Platform.ANDROID);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9");
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Redmi 7A");
-        capabilities.setCapability(MobileCapabilityType.UDID, "acab80aa0406");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "11");
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Nexus 5X");
+        capabilities.setCapability(MobileCapabilityType.UDID, "emulator-5554");
+        capabilities.setCapability(MobileCapabilityType.APP, ApplicationProperties.APK_PATH);
         capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, ApplicationConstants.APP_PACKAGE);
         capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, ApplicationConstants.APP_ACTIVITY);
+        return capabilities;
+    }
+
+    private DesiredCapabilities getAndroidBrowserstackCapability() {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("browserstack.user", "vladhaypel_3Y12qk");
+        capabilities.setCapability("browserstack.key", "1DYcPySqtHTHQaSmjWzo");
+        capabilities.setCapability("app", "bs://b1a19d735128a32b192ad96607930fe1e88271c4");
+        capabilities.setCapability("device", "Google Pixel 3");
+        capabilities.setCapability("os_version", "9.0");
+        capabilities.setCapability("project", "Discord");
+        capabilities.setCapability("build", "Java Android");
+        capabilities.setCapability("name", "Regression suite");
         return capabilities;
     }
 
@@ -52,4 +69,6 @@ public class CapabilityFactory implements Factory<DesiredCapabilities, Capabilit
         capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, ApplicationConstants.APP_ACTIVITY);
         return capabilities;
     }
+
+
 }
